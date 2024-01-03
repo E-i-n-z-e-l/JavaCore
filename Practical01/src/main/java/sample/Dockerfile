@@ -1,5 +1,5 @@
-# Используем базовый образ с Java 17
-FROM openjdk:17
+# Используем базовый образ с Java
+FROM openjdk:20
 
 # Установка рабочей директории внутри контейнера
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Установка переменной окружения для Java
-ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-20-openjdk-amd64
 
 # Указываем команду для запуска приложения
 CMD ["java", "Main"]
