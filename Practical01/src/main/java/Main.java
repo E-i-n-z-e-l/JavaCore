@@ -1,5 +1,3 @@
-package sample;
-
 import regular.Decorator;
 import regular.OtherClass;
 
