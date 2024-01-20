@@ -22,7 +22,7 @@ public class Main {
                 "engineer",
                 "+79765463452",
                 BigDecimal.valueOf(60000),
-                LocalDate.of(1990, 1, 1));
+                LocalDate.of(1970, 1, 1));
 
         Employees employee4 = new Employees("Ivan Sidorov",
                 "analyst",
@@ -31,55 +31,79 @@ public class Main {
                 LocalDate.of(1990, 1, 1));
 
         Employees employee5 = new Employees("Petr Petrov",
-                "team lead",
+                "senor",
                 "+79765463452",
                 BigDecimal.valueOf(300000),
                 LocalDate.of(1975, 1, 1));
+
+        Leader leader = new Leader("John Doe",
+                "team lead",
+                "+79876543210",
+                BigDecimal.valueOf(400000),
+                LocalDate.of(1985, 5, 10));
 
         List<Employees> employees = new ArrayList<>(Arrays.asList(employee1,
                 employee2,
                 employee3,
                 employee4,
-                employee5));
+                employee5,
+                leader));
 
         for (Employees employee : employees) {
             employee.printInfo();
         }
+        // Повышаем ЗП всем кроме ТимЛида
+        salaryIncreaseForEmployees(employees, 45, 50000);
+        System.out.println();
+
+        for (Employees employee : employees) {
+            employee.printInfo();
+        }
+
+        System.out.println(getAverageSalaryAndAge(employees));
+    }
+
+    /**
+     * Метод, повышающий зарплату всем сотрудникам старше
+     * 45 лет на 50000.
+     * <p>
+     * Метод должен принимать в качестве параметра массив сотрудников.
+     *
+     * @param employees
+     * @param ageOlder
+     * @param bonusValue
+     */
+    public static void salaryIncreaseForEmployees(List<Employees> employees, int ageOlder, int bonusValue) {
+        for (Employees employee : employees) {
+            if (employee.getAge() > ageOlder) {
+                employee.increaseSalary(bonusValue);
+            }
+        }
+    }
+
+    /**
+     * Методы (принимающие на вход массив сотрудников), вычисляющие средний возраст и среднюю
+     * зарплату сотрудников
+     *
+     * @param employees
+     * @return
+     */
+    public static String getAverageSalaryAndAge(List<Employees> employees) {
+        double averageSalaries = employees.stream().mapToDouble(x -> x.getSalary().doubleValue()).average().orElseThrow();
+        double averageAge = employees.stream().mapToDouble(x -> (double) x.getAge()).average().orElseThrow();
+
+        return String.format("Average salary - %s, age - %s", averageSalaries, averageAge);
+
     }
 }
 
-//        salaryIncreaseForEmployees(employees, 45, 30000);
-//        System.out.println();
-//
-//        for (Employee employee : employees) {
-//            employee.printInfo();
-//        }
-
-//        System.out.println(getAverageSalaryAndAge(employees));
 
 
 
-//    public static void salaryIncreaseForEmployees(List<Employee> employees, int ageOlder, int bonusValue) {
-//        for (Employee employee : employees) {
-//            if (employee.getAge() > ageOlder) {
-//                employee.increaseSalary(bonusValue);
-//            }
-//        }
-//    }
 
-//    public static String getAverageSalaryAndAge(List<Employee> employees) {
-//        double averageSalaries = employees.stream().mapToDouble(x -> x.getSalary().doubleValue()).average().orElseThrow();
-//        double averageAge = employees.stream().mapToDouble(x -> (double) x.getAge()).average().orElseThrow();
-//
-//        return String.format("Average salary - %s, age - %s", averageSalaries, averageAge);
-//
-//    }
 
-//    public static AverageResponseDTO getAverage(List<Employee> employees) {
-//        return AverageResponseDTO.builder()
-//                .averageAge(employees.stream().mapToDouble(x -> (double) x.getAge()).average().orElseThrow())
-//                .averageSalary(employees.stream().mapToDouble(x -> x.getSalary().doubleValue()).average().orElseThrow())
-//                .averageLettersInFIO((int) employees.stream().mapToInt(x -> x.getFIO().length()).average().orElseThrow())
-//                .build();
-//    }
+
+
+
+
 

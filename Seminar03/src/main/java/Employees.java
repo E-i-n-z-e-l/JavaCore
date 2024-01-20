@@ -1,11 +1,12 @@
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 
 
-//@AllArgsConstructor
-//
-//@Data
+
+
 public class Employees {
     private String FIO;
     private String position;
@@ -79,5 +80,23 @@ public class Employees {
 
     public void increaseSalary(int value) {
         this.salary = salary.add(BigDecimal.valueOf(value));
+    }
+
+    /**
+     * 1. Написать прототип компаратора - метод внутри класса сотрудника, сравнивающий две даты, представленные
+     * в виде трёх чисел гггг-мм-дд, без использования условного оператора.
+     * @param year1
+     * @param month1
+     * @param day1
+     * @param year2
+     * @param month2
+     * @param day2
+     * @return
+     */
+    public int compareDates(int year1, int month1, int day1, int year2, int month2, int day2) {
+        LocalDate date1 = LocalDate.of(year1, month1, day1);
+        LocalDate date2 = LocalDate.of(year2, month2, day2);
+
+        return date1.compareTo(date2);
     }
 }
