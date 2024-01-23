@@ -1,7 +1,6 @@
 package onlineShop;
 
 import lombok.Data;
-
 import java.math.BigDecimal;
 @Data
 public class Product {
@@ -11,7 +10,6 @@ public class Product {
         this.name = name;
         this.price = price;
     }
-
     public Object getName() {
         return name;
     }

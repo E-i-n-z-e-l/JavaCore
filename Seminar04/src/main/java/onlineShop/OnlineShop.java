@@ -1,7 +1,7 @@
 package onlineShop;
 
 
-import lombok.Data;
+
 import onlineShop.exceptions.CustomerNotExistException;
 import onlineShop.exceptions.ProductNotExistException;
 import onlineShop.exceptions.QuantityException;
@@ -9,21 +9,18 @@ import onlineShop.exceptions.QuantityException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+import lombok.Data;
 @Data
 public class OnlineShop {
     private static List<Customer> customerList = new ArrayList<>();
     private static List<Product> productList = new ArrayList<>();
     private static List<Order> orderList = new ArrayList<>();
-
     public static List<Customer> getCustomerList() {
         return customerList;
     }
-
     public static List<Product> getProductList() {
         return productList;
     }
-
     public static List<Order> getOrderList() {
         return orderList;
     }
@@ -52,8 +49,6 @@ public class OnlineShop {
         if (currentProduct == null) {
             throw new ProductNotExistException();
         }
-
         return new Order(currentCustomer, currentProduct, currentQuantity);
-
     }
 }
