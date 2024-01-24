@@ -12,7 +12,9 @@ public class Main {
         System.out.println("online shop");
 
         OnlineShop.getCustomerList().add(new Customer("Ivanov Ivan", LocalDate.of(1987, 12, 9), "+9867566473"));
+        OnlineShop.getCustomerList().get(0).setGender(Customer.Gender.MALE); // Добавление гендера покупателю "Ivanov Ivan"
         OnlineShop.getCustomerList().add(new Customer("Petrov Petr", LocalDate.of(1988, 12, 20), "+9867566475"));
+        OnlineShop.getCustomerList().get(1).setGender(Customer.Gender.MALE); // Добавление гендера покупателю "Petrov Petr"
         OnlineShop.getProductList().add(new Product("apple", BigDecimal.valueOf(10L)));
         OnlineShop.getProductList().add(new Product("pineapple", BigDecimal.valueOf(50L)));
 

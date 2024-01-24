@@ -10,6 +10,7 @@ public class Customer {
     private String FIO;
     private LocalDate dateOfBirth;
     private String phone;
+    private Gender gender;
 
     public Customer(String FIO, LocalDate dateOfBirth, String phone) {
         this.FIO = FIO;
@@ -19,4 +20,15 @@ public class Customer {
     public Object getFIO() {
         return FIO;
     }
+    public enum Gender {
+        MALE,
+        FEMALE
+    }
+    public Gender getGender() {
+        return gender;
+    }
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
 }
