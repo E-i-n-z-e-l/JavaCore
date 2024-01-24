@@ -3,6 +3,9 @@ package onlineShop;
 import lombok.Data;
 import java.time.LocalDate;
 @Data
+/**
+ * Класс Customer представляет собой модель данных для представления информации о клиенте магазина онлайн-шопинга.
+ */
 public class Customer {
     private String FIO;
     private LocalDate dateOfBirth;

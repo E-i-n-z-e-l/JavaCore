@@ -3,6 +3,9 @@ package onlineShop;
 import lombok.Data;
 import java.math.BigDecimal;
 @Data
+/**
+ * Класс Product является моделью для представления информации о товаре.
+ */
 public class Product {
     private String name;
     private BigDecimal price;
