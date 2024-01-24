@@ -6,8 +6,82 @@ import onlineShop.exceptions.QuantityException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
 
 public class Main {
+    public enum Holiday {
+        NONE,
+        NEW_YEAR,
+        INTERNATIONAL_WOMENS_DAY,
+        DEFENDER_OF_THE_FATHERLAND_DAY,
+        DEFENDER_OF_THE_EDUCATION_DAY
+    }
+
+    private static boolean isHolidayToday(Holiday holiday) {
+        LocalDate currentDate = LocalDate.now();
+
+        switch (holiday) {
+            case NEW_YEAR:
+                // проверяем, является ли сегодня Новым Годом (1 января)
+                return currentDate.getMonth() == Month.JANUARY && currentDate.getDayOfMonth() == 1;
+            case INTERNATIONAL_WOMENS_DAY:
+                // проверяем, является ли сегодня 8 марта
+                return currentDate.getMonth() == Month.MARCH && currentDate.getDayOfMonth() == 8;
+            case DEFENDER_OF_THE_FATHERLAND_DAY:
+                // проверяем, является ли сегодня 23 февраля
+                return currentDate.getMonth() == Month.FEBRUARY && currentDate.getDayOfMonth() == 23;
+            case DEFENDER_OF_THE_EDUCATION_DAY:
+                return currentDate.getMonth() == Month.JANUARY && currentDate.getDayOfMonth() == 24;
+            default:
+                return false;
+        }
+    }
+
+    private static Holiday getHoliday(LocalDate currentDate) {
+        if (isHolidayToday(Holiday.NEW_YEAR)) {
+            return Holiday.NEW_YEAR;
+        } else if (isHolidayToday(Holiday.INTERNATIONAL_WOMENS_DAY)) {
+            return Holiday.INTERNATIONAL_WOMENS_DAY;
+        } else if (isHolidayToday(Holiday.DEFENDER_OF_THE_FATHERLAND_DAY)) {
+            return Holiday.DEFENDER_OF_THE_FATHERLAND_DAY;
+        } else if (isHolidayToday(Holiday.DEFENDER_OF_THE_EDUCATION_DAY)) {
+            return Holiday.DEFENDER_OF_THE_EDUCATION_DAY;
+        } else {
+            return Holiday.NONE;
+        }
+    }
+
+    private static void congratulateCustomer(Customer customer, Holiday holiday) {
+        String gender = customer.getGender() == Customer.Gender.MALE ? "мужчина" : "женщина";
+        String holidayMessage = "";
+
+        switch (holiday) {
+            case NEW_YEAR:
+                holidayMessage = "С Новым Годом!";
+                break;
+            case INTERNATIONAL_WOMENS_DAY:
+                holidayMessage = "С 8 Марта!";
+                break;
+            case DEFENDER_OF_THE_FATHERLAND_DAY:
+                holidayMessage = "С Днем защитника Отечества!";
+                break;
+            case DEFENDER_OF_THE_EDUCATION_DAY:
+                holidayMessage = "С Днем Образования!";
+        }
+        System.out.println(customer.getFIO() + " (" + gender + "): " + holidayMessage);
+    }
+
+    public static void congratulateEmployees(Customer[] customers) {
+        LocalDate currentDate = LocalDate.now();
+        Holiday currentHoliday = getHoliday(currentDate);
+
+        for (Customer customer : customers) {
+            if (isHolidayToday(currentHoliday)) {
+                congratulateCustomer(customer, currentHoliday);
+            }
+        }
+    }
+
     public static void main(String[] args) throws CustomerNotExistException, ProductNotExistException, QuantityException {
         System.out.println("online shop");
 
@@ -44,5 +118,8 @@ public class Main {
 
         System.out.println(OnlineShop.getOrderList());
         System.out.println(OnlineShop.getOrderList().size() + " orders received");
+
+        Customer[] customersArray = OnlineShop.getCustomerList().toArray(new Customer[0]);
+        congratulateEmployees(customersArray);
     }
 }
